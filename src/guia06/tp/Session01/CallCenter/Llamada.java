@@ -1,5 +1,5 @@
 // cSpell:ignore guia
-package guia06.tp.Session01;
+package guia06.tp.Session01.CallCenter;
 
 import java.util.ArrayList;
 

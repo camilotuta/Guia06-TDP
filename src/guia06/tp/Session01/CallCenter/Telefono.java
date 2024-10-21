@@ -1,5 +1,5 @@
 // cSpell:ignore guia telefono
-package guia06.tp.Session01;
+package guia06.tp.Session01.CallCenter;
 
 public class Telefono {
     private String numero;
