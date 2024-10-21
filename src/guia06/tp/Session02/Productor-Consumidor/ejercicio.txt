@@ -1,0 +1,3 @@
+Se le solicita realizar un ejemplo: productor/ consumidor que trabaje con 2 Threads, el primer
+Thread generará números aleatorios entre 1 y 100 que serán leídos y multiplicados por 2 en el
+segundo Thread el cual imprimirá el resultado.

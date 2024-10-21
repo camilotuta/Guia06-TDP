@@ -1,0 +1,4 @@
+Desarrolle el siguiente ejercicio: “simular el proceso de cobro de un supermercado; es decir,
+unos clientes van con un carro lleno de productos y una cajera les cobra los productos,
+pasándolos uno a uno por el escáner de la caja registradora. En este caso la cajera debe
+de procesar la compra cliente a cliente1”
