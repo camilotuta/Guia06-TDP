@@ -6,20 +6,7 @@ import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class ProducerConsumer {
-
-    private static final int QUEUE_CAPACITY = 10;
-
-    public static void main(String[] args) {
-
-        BlockingQueue<Integer> buffer = new LinkedBlockingQueue<>(QUEUE_CAPACITY);
-
-        Thread hiloProducer = new Thread(new Producer(buffer));
-        Thread hiloConsumer = new Thread(new Consumer(buffer));
-
-        hiloProducer.start();
-        hiloConsumer.start();
-    }
+public class ProductorConsumidor {
 
     static class Producer implements Runnable {
         private BlockingQueue<Integer> buffer;
@@ -63,5 +50,18 @@ public class ProducerConsumer {
                 Thread.currentThread().interrupt();
             }
         }
+    }
+
+    private static final int QUEUE_CAPACITY = 10;
+
+    public static void main(String[] args) {
+
+        BlockingQueue<Integer> buffer = new LinkedBlockingQueue<>(QUEUE_CAPACITY);
+
+        Thread hiloProductor = new Thread(new Producer(buffer));
+        Thread hiloConsumidor = new Thread(new Consumer(buffer));
+
+        hiloProductor.start();
+        hiloConsumidor.start();
     }
 }

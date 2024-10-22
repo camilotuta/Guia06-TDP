@@ -1,3 +1,4 @@
+// cSpell:ignore guia
 package guia06.tp.Session01.Supermercado;
 
 import java.util.ArrayList;

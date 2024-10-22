@@ -4,6 +4,31 @@ package guia06.tp.Session02.Matrices;
 import java.util.Random;
 
 public class Concurrente {
+    static class MatrixMultiplier implements Runnable {
+        private double[][] A, B, C;
+        private int primeraFila, ultimaFila;
+
+        public MatrixMultiplier(double[][] A, double[][] B, double[][] C, int primeraFila, int ultimaFila) {
+            this.A = A;
+            this.B = B;
+            this.C = C;
+            this.primeraFila = primeraFila;
+            this.ultimaFila = ultimaFila;
+        }
+
+        @Override
+        public void run() {
+            int tamaño = A.length;
+            for (int i = primeraFila; i < ultimaFila; i++) {
+                for (int j = 0; j < tamaño; j++) {
+                    for (int k = 0; k < tamaño; k++) {
+                        C[i][j] += A[i][k] * B[k][j];
+                    }
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException {
         int tamaño = 1000;
         double[][] A = generateMatrix(tamaño);
@@ -29,31 +54,6 @@ public class Concurrente {
 
         long tiempoFinal = System.currentTimeMillis();
         System.out.println("Tiempo de ejecución concurrente: " + (tiempoFinal - tiempoInicial) + " ms");
-    }
-
-    static class MatrixMultiplier implements Runnable {
-        private double[][] A, B, C;
-        private int primeraFila, ultimaFila;
-
-        public MatrixMultiplier(double[][] A, double[][] B, double[][] C, int primeraFila, int ultimaFila) {
-            this.A = A;
-            this.B = B;
-            this.C = C;
-            this.primeraFila = primeraFila;
-            this.ultimaFila = ultimaFila;
-        }
-
-        @Override
-        public void run() {
-            int tamaño = A.length;
-            for (int i = primeraFila; i < ultimaFila; i++) {
-                for (int j = 0; j < tamaño; j++) {
-                    for (int k = 0; k < tamaño; k++) {
-                        C[i][j] += A[i][k] * B[k][j];
-                    }
-                }
-            }
-        }
     }
 
     public static double[][] generateMatrix(int tamaño) {
