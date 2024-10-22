@@ -1,3 +1,5 @@
+// cSpell:ignore guia
+
 package guia06.tp.Session02.ProductorConsumidor;
 
 import java.util.Random;
@@ -12,11 +14,11 @@ public class ProducerConsumer {
 
         BlockingQueue<Integer> buffer = new LinkedBlockingQueue<>(QUEUE_CAPACITY);
 
-        Thread producerThread = new Thread(new Producer(buffer));
-        Thread consumerThread = new Thread(new Consumer(buffer));
+        Thread hiloProducer = new Thread(new Producer(buffer));
+        Thread hiloConsumer = new Thread(new Consumer(buffer));
 
-        producerThread.start();
-        consumerThread.start();
+        hiloProducer.start();
+        hiloConsumer.start();
     }
 
     static class Producer implements Runnable {
@@ -31,9 +33,9 @@ public class ProducerConsumer {
         public void run() {
             try {
                 while (true) {
-                    int number = random.nextInt(100) + 1;
-                    System.out.println("Productor genera: " + number);
-                    buffer.put(number);
+                    int numero = random.nextInt(100) + 1;
+                    System.out.println("Productor genera: " + numero);
+                    buffer.put(numero);
                     Thread.sleep(1000);
                 }
             } catch (InterruptedException e) {
@@ -53,8 +55,8 @@ public class ProducerConsumer {
         public void run() {
             try {
                 while (true) {
-                    int number = buffer.take();
-                    System.out.println("Consumidor lee: " + number + ", multiplica por 2: " + (number * 2));
+                    int numero = buffer.take();
+                    System.out.println("Consumidor lee: " + numero + ", multiplica por 2: " + (numero * 2));
                     Thread.sleep(500);
                 }
             } catch (InterruptedException e) {

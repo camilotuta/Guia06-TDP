@@ -1,20 +1,21 @@
+// cSpell:ignore guia
 package guia06.tp.Session02.Matrices;
 
 import java.util.Random;
 
 public class Concurrente {
     public static void main(String[] args) throws InterruptedException {
-        int size = 1000;
-        double[][] A = generateMatrix(size);
-        double[][] B = generateMatrix(size);
-        double[][] C = new double[size][size];
+        int tamaño = 1000;
+        double[][] A = generateMatrix(tamaño);
+        double[][] B = generateMatrix(tamaño);
+        double[][] C = new double[tamaño][tamaño];
 
-        long startTime = System.currentTimeMillis();
+        long tiempoInicial = System.currentTimeMillis();
 
-        Thread t1 = new Thread(new MatrixMultiplier(A, B, C, 0, size / 4));
-        Thread t2 = new Thread(new MatrixMultiplier(A, B, C, size / 4, size / 2));
-        Thread t3 = new Thread(new MatrixMultiplier(A, B, C, size / 2, 3 * size / 4));
-        Thread t4 = new Thread(new MatrixMultiplier(A, B, C, 3 * size / 4, size));
+        Thread t1 = new Thread(new MatrixMultiplier(A, B, C, 0, tamaño / 4));
+        Thread t2 = new Thread(new MatrixMultiplier(A, B, C, tamaño / 4, tamaño / 2));
+        Thread t3 = new Thread(new MatrixMultiplier(A, B, C, tamaño / 2, 3 * tamaño / 4));
+        Thread t4 = new Thread(new MatrixMultiplier(A, B, C, 3 * tamaño / 4, tamaño));
 
         t1.start();
         t2.start();
@@ -26,28 +27,28 @@ public class Concurrente {
         t3.join();
         t4.join();
 
-        long endTime = System.currentTimeMillis();
-        System.out.println("Tiempo de ejecución concurrente: " + (endTime - startTime) + " ms");
+        long tiempoFinal = System.currentTimeMillis();
+        System.out.println("Tiempo de ejecución concurrente: " + (tiempoFinal - tiempoInicial) + " ms");
     }
 
     static class MatrixMultiplier implements Runnable {
         private double[][] A, B, C;
-        private int startRow, endRow;
+        private int primeraFila, ultimaFila;
 
-        public MatrixMultiplier(double[][] A, double[][] B, double[][] C, int startRow, int endRow) {
+        public MatrixMultiplier(double[][] A, double[][] B, double[][] C, int primeraFila, int ultimaFila) {
             this.A = A;
             this.B = B;
             this.C = C;
-            this.startRow = startRow;
-            this.endRow = endRow;
+            this.primeraFila = primeraFila;
+            this.ultimaFila = ultimaFila;
         }
 
         @Override
         public void run() {
-            int size = A.length;
-            for (int i = startRow; i < endRow; i++) {
-                for (int j = 0; j < size; j++) {
-                    for (int k = 0; k < size; k++) {
+            int tamaño = A.length;
+            for (int i = primeraFila; i < ultimaFila; i++) {
+                for (int j = 0; j < tamaño; j++) {
+                    for (int k = 0; k < tamaño; k++) {
                         C[i][j] += A[i][k] * B[k][j];
                     }
                 }
@@ -55,14 +56,14 @@ public class Concurrente {
         }
     }
 
-    public static double[][] generateMatrix(int size) {
+    public static double[][] generateMatrix(int tamaño) {
         Random rand = new Random();
-        double[][] matrix = new double[size][size];
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                matrix[i][j] = rand.nextDouble() * 10;
+        double[][] matriz = new double[tamaño][tamaño];
+        for (int i = 0; i < tamaño; i++) {
+            for (int j = 0; j < tamaño; j++) {
+                matriz[i][j] = rand.nextDouble() * 10;
             }
         }
-        return matrix;
+        return matriz;
     }
 }
