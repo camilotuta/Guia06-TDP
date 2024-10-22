@@ -1,3 +1,0 @@
-Implemente un programa secuencial que calcule el producto de dos grandes matrices. Después
-modifíquelo para que esta tarea se realice entre cuatro Threads, cada uno ocupado de un
-subconjunto de la matriz resultado. Mida el tiempo que emplea cada una de las versiones.
